@@ -36,10 +36,14 @@ require_once("../../controllers/mostrarInfoCliente.php");
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../Cliensite/images/favicon.png" />
   
+  <!-- Aos Animate -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <!-- Themefisher Icon font -->
   <link rel="stylesheet" href="../Cliensite/plugins/themefisher-font/style.css">
   <!-- bootstrap.min css -->
   <link rel="stylesheet" href="../Cliensite/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
   
   <!-- Animate css -->
   <link rel="stylesheet" href="../Cliensite/plugins/animate/animate.css">
@@ -151,7 +155,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb imagenesP">
+					<div class="product-thumb imagenesP" data-aos="zoom-in"  data-aos-duration="1500">
 						<span class="bage">Descuento</span>
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-1.jpg" alt="product-img" style="height: 400px;" />
 						<div class="preview-meta">
@@ -174,11 +178,14 @@ require_once("../../controllers/mostrarInfoCliente.php");
 						<h4><a href="../Cliensite/product-single.html">Amortiguador de maletero</a></h4>
 						<p class="price">$200</p>
 					</div>
+					<div class="descri-produc">
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore possimus ducimus, ab nostrum atque neque voluptatem aliquid iusto nobis placeat.</p>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-2.png" alt="product-img" style="height: 400px;"/>
 						<div class="preview-meta">
 							<ul>
@@ -204,7 +211,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-3.jpg" alt="product-img" style="height: 400px;" />
 						<div class="preview-meta">
 							<ul>
@@ -230,7 +237,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-4.jpg" alt="product-img" style="height: 400px;" />
 						<div class="preview-meta">
 							<ul>
@@ -256,7 +263,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-5.jpg" alt="product-img"  style="height: 400px;"/>
 						<div class="preview-meta">
 							<ul>
@@ -282,7 +289,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-6.jpg" alt="product-img"  style="height: 400px;"/>
 						<div class="preview-meta">
 							<ul>
@@ -308,7 +315,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<span class="bage">Sale</span>
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-7.jpg" alt="product-img" style="height: 400px;"/>
 						<div class="preview-meta">
@@ -335,7 +342,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-8.jpg" alt="product-img" style="height: 400px;"/>
 						<div class="preview-meta">
 							<ul>
@@ -361,7 +368,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-4">
 				<div class="product-item">
-					<div class="product-thumb">
+					<div class="product-thumb" data-aos="zoom-in"  data-aos-duration="1500">
 						<img class="img-responsive" src="..
 						/Cliensite/images/shop/products/product-9.jpg" alt="product-img" style="height: 400px; "/>
 						<div class="preview-meta">
@@ -456,33 +463,9 @@ require_once("../../controllers/mostrarInfoCliente.php");
 	</div>
 </footer>
 
-    <!-- 
-    Essential Scripts
-    =====================================-->
-    
-    <!-- Main jQuery -->
-    <script src="../Cliensite/plugins/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.1 -->
-    <script src="../Cliensite/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Bootstrap Touchpin -->
-    <script src="../Cliensite/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-    <!-- Instagram Feed Js -->
-    <script src="../Cliensite/plugins/instafeed/instafeed.min.js"></script>
-    <!-- Video Lightbox Plugin -->
-    <script src="../Cliensite/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
-    <!-- Count Down Js -->
-    <script src="../Cliensite/plugins/syo-timer/build/jquery.syotimer.min.js"></script>
-
-    <!-- slick Carousel -->
-    <script src="../Cliensite/plugins/slick/slick.min.js"></script>
-    <script src="../Cliensite/plugins/slick/slick-animation.min.js"></script>
-
-    <!-- Google Mapl -->
-    <script src="../Cliensite/https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-    <script type="text/javascript" src="../Cliensite/plugins/google-map/gmap.js"></script>
-
-    <!-- Main Js File -->
-    <script src="../Cliensite/js/script.js"></script>
+<?php
+	include("include-footer.php")
+?>
     
 
 

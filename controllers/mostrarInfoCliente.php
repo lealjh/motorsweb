@@ -103,6 +103,11 @@ function pefilEditar()
                               aria-selected="true">Perfil</button>
                       </li>
                       <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="preferencias-tab" data-toggle="tab"
+                              data-target="#prefe" type="button" role="tab" aria-controls="contact"
+                              aria-selected="false">Preferencias</button>
+                      </li> 
+                      <li class="nav-item" role="presentation">
                           <button class="nav-link" id="profile-tab" data-toggle="tab"
                               data-target="#profile" type="button" role="tab" aria-controls="profile"
                               aria-selected="false">Cambiar foto</button>
@@ -112,6 +117,7 @@ function pefilEditar()
                               data-target="#contact" type="button" role="tab" aria-controls="contact"
                               aria-selected="false">Cambiar clave</button>
                       </li>
+                      
                      
                   </ul>
                   <div class="tab-content" id="myTabContent">
@@ -120,11 +126,13 @@ function pefilEditar()
                           <form class="text-left clearfix" action="../../controllers/modificarCuentaCliente.php" method="POST" enctype="multipart/form-Data">
                               <div class="row ">
                                   <div class="form-group col-md-6">
+                                      <p class="name-dataCliente">Identificaión<p/>
                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
                                           readonly placeholder="identificacion" name="identificacion">
                                   </div>
 
                                   <div class="form-group col-md-6">
+                                      <p class="name-dataCliente">Tipo de Identificaión<p/>
                                       <select name="tipo_doc" id="" class="form-control form-group ">
                                           <option value= " '.$f['TipoDocumento'].' ">'.$f['TipoDocumento'].'</option>
                                           <option value="Cc">CC</option>
@@ -134,18 +142,22 @@ function pefilEditar()
                                       </select>
                                   </div>
                                   <div class="form-group col-md-6">
+                                      <p class="name-dataCliente">Nombre<p/>
                                       <input type="text" class="form-control" value="'.$f['Nombres'].'" placeholder="Nombre"
                                           name="nombres">
                                   </div>
                                   <div class="form-group col-md-6">
+                                    <p class="name-dataCliente">Apellidos<p/>
                                       <input type="text" class="form-control" value="'.$f['Apellidos'].'" placeholder="Apellido"
                                           name="apellidos">
                                   </div>
-                                  <div class="form-group col-md-6">
+                                  <div class="form-group col-md-6">                                   
+                                        <p class="name-dataCliente">Email<p/>
                                       <input type="email" class="form-control" value="'.$f['Email'].'" placeholder="Email"
                                           name="email">
                                   </div>
                                   <div class="form-group col-md-6">
+                                      <p class="name-dataCliente">Telefono<p/>
                                       <input type="tel" class="form-control" value="'.$f['Telefono'].'" placeholder="Telefono"
                                           name="telefono">
                                   </div>
@@ -165,13 +177,14 @@ function pefilEditar()
                           <form class="text-left clearfix" action="../../controllers/modificarFotoCliente.php" method="POST" enctype="multipart/form-Data">
                               <div class="row ">
                               <div class="form-group col-md-12">
+                                      <p class="name-dataCliente">Identificaión<p/>
                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
                                           readonly placeholder="identificacion" name="identificacion">
                                   </div>
 
                                   <div class="form-group col-md-12">
-                                      <label>foto de perfil:</label>
-                                      <input type="file" class="form-control" placeholder="Foto usuario"
+                                  <p class="name-dataCliente">Foto Usuario<p/>
+                                  <input type="file" class="form-control" placeholder="Foto usuario"
                                           name="foto" accept=".jpeg, .jpg, .png, .gif">
                                   </div>
 
@@ -191,16 +204,19 @@ function pefilEditar()
                               <div class="row ">
                                   
                               <div class="form-group col-md-12">
+                                      <p class="name-dataCliente">Identificaión<p/>
                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
                                           readonly placeholder="identificacion" name="identificacion">
                                   </div>
 
                               <div class="form-group col-md-6">
+                                      <p class="name-dataCliente">Nueva Clave<p/>
                                       <input type="password" class="form-control"
                                           placeholder="Nueva clave" name="clave" required>
                                   </div>
 
                                   <div class="form-group col-md-6">
+                                      <p class="name-dataCliente">Confirmar Clave<p/>
                                       <input type="password" class="form-control"
                                           placeholder="Confirmar clave" name="clave2" required>
                                   </div>
@@ -213,6 +229,49 @@ function pefilEditar()
                               </div>
                           </form>
                       </div>
+
+                        <div class="tab-pane fade" id="prefe" role="tabpanel" aria-labelledby="home-tab">
+                            <form class="text-left clearfix" action="../../controllers/modificarCuentaCliente.php" method="POST" enctype="multipart/form-Data">
+                            <div class="row ">
+                                <div class="form-group col-md-6">
+                                    <input type="number" class="form-control" value="'.$f['Identificacion'].'"
+                                        readonly placeholder="identificacion" name="identificacion">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <select name="tipo_doc" id="" class="form-control form-group">
+                                        <option value= " '.$f['TipoDocumento'].' ">'.$f['TipoDocumento'].'</option>
+                                        <option value="Cc">CC</option>
+                                        <option value="Ce">CE</option>
+                                        <option value="Pasaporte">PASAPORTE</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" value="'.$f['Nombres'].'" placeholder="Nombre"
+                                        name="nombres">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" value="'.$f['Apellidos'].'" placeholder="Apellido"
+                                        name="apellidos">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="email" class="form-control" value="'.$f['Email'].'" placeholder="Email"
+                                        name="email">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="tel" class="form-control" value="'.$f['Telefono'].'" placeholder="Telefono"
+                                        name="telefono">
+                                </div>
+
+
+                            </div>
+                            <div class="text-center">
+                                <button type="submit"
+                                    class="btn btn-main text-center">Modificar</button>
+                            </div>
+                            </form>
+                        </div>
                   </div>
 
               </div>

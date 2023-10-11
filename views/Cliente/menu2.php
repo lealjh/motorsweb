@@ -40,6 +40,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
   <link rel="stylesheet" href="../Cliensite/plugins/themefisher-font/style.css">
   <!-- bootstrap.min css -->
   <link rel="stylesheet" href="../Cliensite/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
   
   <!-- Animate css -->
   <link rel="stylesheet" href="../Cliensite/plugins/animate/animate.css">

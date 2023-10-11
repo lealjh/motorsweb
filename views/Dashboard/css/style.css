@@ -1911,8 +1911,19 @@ footer p {
 }
 /*    Input Style
 ------------------------*/
+.name-dataCliente{
+  background:#c6d1d4 ;
+  margin-bottom: 0;
+  width: 160px;
+  text-align: center;
+  color: #000000;
+  border: 1.5px solid #000;
+  border-bottom: none;
+  /* max-width: fit-content; */
+}
+
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .form-control {
   min-height: 42px;

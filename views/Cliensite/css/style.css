@@ -955,7 +955,13 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
 }
 
 .product-item {
-  margin-bottom: 30px;
+  margin-bottom: 80px;
+  padding: 10px;
+  background: #c6d1d4;
+  -webkit-box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67);
+-moz-box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67);
+box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67);
+  border-radius: 10px;
 }
 .product-item .product-thumb {
   position: relative;
@@ -963,6 +969,12 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
 .product-item .product-thumb img {
   width: 100%;
   height: auto;
+  border-radius: 10px;
+  padding: 1px;
+  background: #000000;
+  /* -webkit-box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67);
+-moz-box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67);
+box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67); */
 }
 .product-item .product-thumb .bage {
   position: absolute;
@@ -1021,7 +1033,10 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   transform: translateY(-20px);
 }
 .product-item .product-content {
-  text-align: center;
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .product-item .product-content h4 {
   font-size: 16px;
@@ -1029,6 +1044,14 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   margin-top: 15px;
   margin-bottom: 6px;
 }
+.product-item .product-content p{
+  margin-top: 15px;
+}
+
+ .descri-produc p{
+  text-align: justify;
+}
+
 .product-item .product-content h4 a {
   color: #000;
 }
