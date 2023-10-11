@@ -62,6 +62,8 @@ function verActividadNav()
     <div class="navbar-nav">
     <a class="nav-link active" aria-current="page" href="Denuncias.php?id=' . $f['Identificacion'] . '">Denuncias y quejas</a>
     <a class="nav-link" href="Historial.php?id=' . $f['Identificacion'] . '">Historial de compras</a>
+    <a class="nav-link" href="Citas.php?id=' . $f['Identificacion'] . '">Citas</a>
+    <a class="nav-link" href="Historial.php?id=' . $f['Identificacion'] . '">Historial de compras</a>
     <a class="nav-link" href="#">Pricing</a>
   </div> 
 
@@ -252,157 +254,135 @@ function mostrarQuejas(){
         <td>'.$f['Asunto'].'</td>
         <td><a href="../../controllers/eliminarQuejaCliente.php?id='. $f['NumerQueja'] . '" class="btn btn-danger"><i class="ti-trash " ></i>  Eliminar</a></td>
     </tr>';
+    }
 }
-        }
-
 }
 
-// function verActividad()
-// {
+function mostrarCitas(){
 
-//   $id = $_GET['id'];
-
-//   $objConsultas = new consultas();
-//   $result = $objConsultas->mostrarDenuncias($id);
-  
-
-//   if (!isset($result)) {
-//     echo '<h2>No hay Quejas registradas hasta el momento</h2>';
-//   } else {
-//   foreach ($result as $f) {
-
-//     echo '
-        
-//       <section id="main-content">
-//       <div class="row">
-        
-//           <div class="col-lg-12">
-//               <div class="card modificar-user">
-//                   <ul class="nav nav-tabs" id="myTab" role="tablist">
-//                       <li class="nav-item" role="presentation">
-//                           <button class="nav-link active" id="home-tab" data-toggle="tab"
-//                               data-target="#home" type="button" role="tab" aria-controls="home"
-//                               aria-selected="true">Quejas o sugerencias hechas</button>
-//                       </li>
-//                       <li class="nav-item" role="presentation">
-//                           <button class="nav-link" id="profile-tab" data-toggle="tab"
-//                               data-target="#profile" type="button" role="tab" aria-controls="profile"
-//                               aria-selected="false">Cambiar foto</button>
-//                       </li>
-//                       <li class="nav-item" role="presentation">
-//                           <button class="nav-link" id="contact-tab" data-toggle="tab"
-//                               data-target="#contact" type="button" role="tab" aria-controls="contact"
-//                               aria-selected="false">Cambiar clave</button>
-//                       </li>
-                     
-//                   </ul>
-//                   <div class="tab-content" id="myTabContent">
-//                       <div class="tab-pane fade show active in" id="home" role="tabpanel"
-//                           aria-labelledby="home-tab">
-//                           <div class="table-responsive">
-//                                         <table class="table table-hover ">
-//                                             <thead>
-//                                                 <tr>
-//                                                     <th>Asunto</th>
-//                                                     <th>Descripcion</th>
-//                                                     <th>Fecha</th>
-//                                                     <th>Contestada</th>
-//                                                 </tr>
-//                                             </thead>
-//                                             <tbody>
-//                                                 <tr>
-//                                                     <td>'.$f['Asunto'].'</td>
-//                                                     <td>'.$f['Descripcion'].'</td>
-//                                                     <td>'.$f['Fecha'].'</td>
-//                                                     <td>'.$f['Asunto'].'</td>
-//                                                 </tr>
-                                                
-                                                
-//                                             </tbody>
-//                                         </table>
-//                                     </div>
-
-//                                 </div>
-//                       </div>
-                      
-                      
-//                       <div class="tab-pane fade" id="profile" role="tabpanel"
-//                           aria-labelledby="profile-tab">
-//                           <form class="text-left clearfix" action="../../controllers/modificarFotoCliente.php" method="POST" enctype="multipart/form-Data">
-//                               <div class="row ">
-//                               <div class="form-group col-md-12">
-//                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
-//                                           readonly placeholder="identificacion" name="identificacion">
-//                                   </div>
-
-//                                   <div class="form-group col-md-12">
-//                                       <label>foto de perfil:</label>
-//                                       <input type="file" class="form-control" placeholder="Foto usuario"
-//                                           name="foto" accept=".jpeg, .jpg, .png, .gif">
-//                                   </div>
-
-
-//                               </div>
-//                               <div class="text-center">
-//                                   <button type="submit"
-//                                       class="btn btn-main text-center">Modificar</button>
-//                               </div>
-//                           </form>
-//                       </div>
-
-
-//                       <div class="tab-pane fade" id="contact" role="tabpanel"
-//                           aria-labelledby="contact-tab">
-//                           <form class="text-left clearfix" action="../../controllers/modificarClaveCliente.php" method="POST" enctype="multipart/form-Data">
-//                               <div class="row ">
-                                  
-//                               <div class="form-group col-md-12">
-//                                       <input type="number" class="form-control" value="'.$f['Identificacion'].'"
-//                                           readonly placeholder="identificacion" name="identificacion">
-//                                   </div>
-
-//                               <div class="form-group col-md-6">
-//                                       <input type="password" class="form-control"
-//                                           placeholder="Nueva clave" name="clave" required>
-//                                   </div>
-
-//                                   <div class="form-group col-md-6">
-//                                       <input type="password" class="form-control"
-//                                           placeholder="Confirmar clave" name="clave2" required>
-//                                   </div>
-                                 
-
-//                               </div>
-//                               <div class="text-center">
-//                                   <button type="submit"
-//                                       class="btn btn-main text-center">Modificar</button>
-//                               </div>
-//                           </form>
-//                       </div>
-//                   </div>
-
-//               </div>
-//           </div>
-//       </div>
-
-
-//       <div class="row">
-//           <div class="col-lg-12">
-//               <div class="footer">
-//                   <p>2018 © Admin Board. - <a href="#">example.com</a></p>
-//               </div>
-//           </div>
-//       </div>
-//   </section>
+    $id = $_SESSION['id'];
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitas($id);
     
-//     ';
 
-//   }
+        if (!isset($result)) {
+            echo '<h2>Hasta este momento no has solitado ninguna queja</h2>';
+        } else {
+            foreach ($result as $f) {
 
 
-//   }
-// }
+    echo'<tr>
+        <td>'.$f['NomServicio'].'</td>
+        <td>'.$f['Nombres'].'</td>
+        <td>'.$f['Direccion'].'</td>
+        <td>'.$f['Fecha'].' / '.$f['Hora'].'</td>
+        <td>'.$f['EstadoCita'].'</td>
+        <td><a  data-bs-toggle="modal" data-bs-target="#'.$f['IdCita'].'" class="btn btn-primary"><i class="ti-trash " ></i>Reprogramar</a></td>
+        <td><a href="../../controllers/cancelarCitaCliente.php?id='.$f['IdCita'].'" class="btn btn-danger"><i class="ti-trash " ></i>Cancelar</a></td>
+    </tr>';
+    }
+}
+}
 
+//modal para reagendar la cita
+function modalReagendar(){
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->verPerfil($id);
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarServicioCliente();
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitas($id);
+  
+    foreach ($result as $f){
+
+
+    echo '
+    <div class="modal product-modal" id="'.$f['IdCita'].'" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
+  				<div class="modal-dialog modal-dialog-centered" style="max-width: 1200px; max-height: 900px;"  >
+    				<div class="modal-content " >
+
+						<div class="modal-body" >
+                            <div class="row">
+                                <h3 style="text-align:center; margin-bottom: 30px;">Agendamiento de cita</h3>
+                                <form class="text-left clearfix"
+                                            action="../../controllers/ModificarCitaCliente.php" method="POST"
+                                            enctype="multipart/form-Data">
+                                            <div class="row ">
+                                            <div class="form-group col-md-6" "margin-bottom:0px;">
+                                            <label> Servicio requerido</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Servicio requerido" readonly value="'.$f['NomServicio'].'" >
+                                                </div>
+                                                <div class="form-group col-md-6" "margin-bottom:0px;">
+                                                <label> Nombre del Taller</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Nombre producto" readonly value="'.$f['Nombres'].'" >
+                                                </div>
+                                                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                <label> Fecha de la cita</label>
+                                                    <input type="date" class="form-control" 
+                                                    placeholder="Proveedor" name="fecha">
+                                                </div>
+                                                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                <label> hora de la cita</label>
+                                                    <input type="time" class="form-control" placeholder="Cantidad"
+                                                        name="hora">
+                                                </div>
+                                                <div class="form-group col-md-12" style="margin-bottom:0px;">
+                                                <label> Direccion</label>
+                                                    <input type="text" class="form-control" placeholder="Cantidad" readonly value="'.$f['Direccion'].'">
+                                                </div>
+                                                <div class="form-group col-md-6" style="margin-bottom:6px;">
+                                                
+                                                    <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['numeroServicio'].'"
+                                                        name="IdServicio">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                
+                                                    <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$id.'"
+                                                        name="IdCliente">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                               
+                                                    <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['Identificacion'].'"
+                                                        name="IdTaller">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                               
+                                                <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['IdCita'].'"
+                                                    name="idcita">
+                                            </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit"
+                                                    class="btn btn-main text-center">Registrar</button>
+                                            </div>
+                                        </form>
+                                
+                            </div>	
+						</div>
+
+						<div class="modal-footer" style="display: flex; justify-content: center;>
+                            
+                            <div class"row">
+                                <div class="col-md-8" style="display: flex; justify-content: center; text-align:center;">
+                                    <p> Estimado/a cliente, Si por alguna razón necesita cancelar o reprogramar la cita, le pedimos amablemente lo registre con un día de anticipación. </p>
+                                </div>
+							    <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                            </div>
+                        
+						</div>
+						
+    				</div>
+  				</div>
+			</div>
+            ';
+    }
+}
 
 function mostrarServiciosIndexcliente(){
     $objConsultas = new consultas();
@@ -425,7 +405,10 @@ function mostrarServiciosIndexcliente(){
                                     </span>
 								</li>
 								<li>
-									<a href="#!"><i class="fi fi-brands-whatsapp"></i></a>
+                                    <span  data-bs-toggle="modal" data-bs-target="#2'.$f['IdServicio'].'">
+                                        <i class="fi fi-brands-whatsapp"></i>
+                                    </span>
+									
 								</li>
 							</ul>
                       	</div>
@@ -455,7 +438,6 @@ function modal(){
 
 
     echo '
-    
     <div class="modal product-modal" id="'.$f['IdServicio'].'" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
   				<div class="modal-dialog modal-dialog-centered" style="max-width: 1200px; max-height: 900px;"  >
     				<div class="modal-content " >
@@ -491,10 +473,106 @@ function modal(){
     }
 }
 
+function modalForm(){
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->verPerfil($id);
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarServicioCliente();
+  
+    foreach ($result as $f){
+
+
+    echo '
+    <div class="modal product-modal" id="2'.$f['IdServicio'].'" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
+  				<div class="modal-dialog modal-dialog-centered" style="max-width: 1200px; max-height: 900px;"  >
+    				<div class="modal-content " >
+
+						<div class="modal-body" >
+                            <div class="row">
+                                <h3 style="text-align:center; margin-bottom: 30px;">Agendamiento de cita</h3>
+                                <form class="text-left clearfix"
+                                            action="../../controllers/registrarCitasCliente.php" method="POST"
+                                            enctype="multipart/form-Data">
+                                            <div class="row ">
+                                            <div class="form-group col-md-6" "margin-bottom:0px;">
+                                            <label> Servicio requerido</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Servicio requerido" readonly value="'.$f['NomServicio'].'" >
+                                                </div>
+                                                <div class="form-group col-md-6" "margin-bottom:0px;">
+                                                <label> Nombre del Taller</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Nombre producto" readonly value="'.$f['Nombres'].'" >
+                                                </div>
+                                                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                <label> Fecha de la cita</label>
+                                                    <input type="date" class="form-control" 
+                                                    placeholder="Proveedor" name="fecha">
+                                                </div>
+                                                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                <label> hora de la cita</label>
+                                                    <input type="time" class="form-control" placeholder="Cantidad"
+                                                        name="hora">
+                                                </div>
+                                                <div class="form-group col-md-12" style="margin-bottom:0px;">
+                                                <label> Direccion</label>
+                                                    <input type="text" class="form-control" placeholder="Cantidad" readonly value="'.$f['Direccion'].'">
+                                                </div>
+                                                <div class="form-group col-md-6" style="margin-bottom:6px;">
+                                                
+                                                    <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['numeroServicio'].'"
+                                                        name="IdServicio">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                
+                                                    <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$id.'"
+                                                        name="IdCliente">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                               
+                                                    <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['Identificacion'].'"
+                                                        name="IdTaller">
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit"
+                                                    class="btn btn-main text-center">Registrar</button>
+                                            </div>
+                                        </form>
+                                
+                            </div>	
+						</div>
+
+						<div class="modal-footer" style="display: flex; justify-content: center;>
+                            
+                            <div class"row">
+                                <div class="col-md-8" style="display: flex; justify-content: center; text-align:center;">
+                                    <p> Estimado/a cliente, Si por alguna razón necesita cancelar o reprogramar la cita, le pedimos amablemente lo registre con un día de anticipación. </p>
+                                </div>
+							    <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                            </div>
+                        
+						</div>
+						
+    				</div>
+  				</div>
+			</div>
+            ';
+    }
+}
+
 function mostrarProductosClientes(){
+    
+
     $objConsultas = new consultas();
     $result = $objConsultas->mostrarProductosCliente();
   
+    if (!isset($result)) {
+        echo '';
+    } else {
     foreach ($result as $f) {
       echo '
       <div class="col-md-4">
@@ -527,14 +605,17 @@ function mostrarProductosClientes(){
         ';
 
 } 
-
+    }
 }
 
 function modalProductos(){
 
     $objConsultas = new consultas();
     $result = $objConsultas->mostrarProductosCliente();
-  
+    
+    if(!isset($result)){
+        echo'';
+    }else{
     foreach ($result as $f){
 
 
@@ -567,11 +648,12 @@ function modalProductos(){
             </div>
         </div>
       </div>
-</div>
+    </div>
 
             ';
-    }
+    }}
 }
+
 
 function mostrarProductosindex(){
     $objConsultas = new consultas();
@@ -609,7 +691,6 @@ function mostrarProductosindex(){
         ';
 
 } 
-
 }
 
 function mostrarServiciosIndex(){
@@ -644,16 +725,8 @@ function mostrarServiciosIndex(){
 					</div>
 				</div>	
 			</div>
-
-
-
-
-  
         ';
-
 } 
 }
-
-
 
 ?>

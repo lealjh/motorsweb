@@ -76,6 +76,23 @@
                 </ul>
             </li>
             <li>
+                <a class="sidebar-sub-toggle">
+                    <i class="ti-user"></i> Citas
+                    <span class="sidebar-collapse-icon ti-angle-down"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="VerCitas.php"> <i class="ti-eye"></i>Pendientes</a>
+                    </li>
+                    <li>
+                        <a href="VerCitasA.php"><i class="ti-eye"></i>Aceptadas</a>
+                    </li>
+                    <li>
+                        <a href="VerCitasP.php"><i class="ti-eye"></i>Terminadas</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
                 <a href="ver-usuarios.php"><i class="ti-comments"></i>Quejas y reclamos</a>
             </li>
         </ul>

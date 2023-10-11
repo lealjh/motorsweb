@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 18:39:17
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 11-10-2023 a las 03:18:33
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `citas`
+--
+
+CREATE TABLE `citas` (
+  `IdCita` int(11) NOT NULL,
+  `Cliente` varchar(50) NOT NULL,
+  `Taller` varchar(50) NOT NULL,
+  `Fecha` date NOT NULL,
+  `Hora` time NOT NULL,
+  `Servicio` varchar(50) NOT NULL,
+  `EstadoCita` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `citas`
+--
+
+INSERT INTO `citas` (`IdCita`, `Cliente`, `Taller`, `Fecha`, `Hora`, `Servicio`, `EstadoCita`) VALUES
+(6, '1004510351', '1004510353', '2023-10-12', '17:33:00', '12', 'Pendiente'),
+(7, '1004510351', '1004510352', '2023-10-19', '20:50:00', '123', 'Pendiente'),
+(8, '1004510351', '1004510352', '2023-10-31', '16:43:00', '124', 'Aceptada');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `factura`
 --
 
@@ -34,7 +59,7 @@ CREATE TABLE `factura` (
   `Cantidad` int(30) NOT NULL,
   `PrecioUnitario` int(30) NOT NULL,
   `Total_Factura` int(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -54,15 +79,15 @@ CREATE TABLE `productos` (
   `Foto3` varchar(200) NOT NULL,
   `Foto4` varchar(200) NOT NULL,
   `InfoVendedor` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`IdProducto`, `NomProducto`, `Proveedor`, `Cantidad`, `Precio`, `Categoria`, `Foto1`, `Foto2`, `Foto3`, `Foto4`, `InfoVendedor`) VALUES
-(12, 'Llanta', 'chevrolet', 3, 9000, 'Repuesto interno', '../Uploads/Productos/perfil1.jpg', '../Uploads/Productos/image-6.png', '../Uploads/Productos/image-6.png', '../Uploads/Productos/image-6.png', '1004510351'),
-(123, 'bomper', 'chevrolet', 3, 9000, 'Repuesto externo', '../Uploads/Productos/perfil1.jpg', '../Uploads/Productos/image-6.png', '../Uploads/Productos/image-6.png', '../Uploads/Productos/in1.png', '1004510351');
+(12, 'pechera', 'chevrolet', 3, 9000, 'Repuesto interno', '../Uploads/Productos/CambiodeAceite.jpg', '../Uploads/Productos/Cambio de aceite1.jpg', '../Uploads/Productos/Revisar la suspencion.jpg', '../Uploads/Productos/', '1004510352'),
+(122, 'Llanta', 'chevrolet', 3, 9000, 'Repuesto externo', '../Uploads/Productos/Cambio de aceite1.jpg', '../Uploads/Productos/', '../Uploads/Productos/', '../Uploads/Productos/', '1004510352');
 
 -- --------------------------------------------------------
 
@@ -77,16 +102,7 @@ CREATE TABLE `quejas` (
   `Fecha` datetime DEFAULT current_timestamp(),
   `Nombre` varchar(200) NOT NULL,
   `Asunto` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `quejas`
---
-
-INSERT INTO `quejas` (`NumerQueja`, `Usuario`, `Descripcion`, `Fecha`, `Nombre`, `Asunto`) VALUES
-(0, '1004510351', 'ffvgsgtrfgrgtegedrfedfedf', '2023-10-04 06:36:14', 'favian andres mancilla', 'adasfda'),
-(2, '1004510352', 'safsfasdf', '2023-10-04 06:50:29', 'favian', 'holaadsaf'),
-(12, '1004510353', 'afefwaf', '2023-10-04 09:55:35', 'fafaf', 'asfasf');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -96,19 +112,21 @@ INSERT INTO `quejas` (`NumerQueja`, `Usuario`, `Descripcion`, `Fecha`, `Nombre`,
 
 CREATE TABLE `servicios` (
   `IdServicio` int(30) NOT NULL,
-  `numeroServicio` int(200) NOT NULL,
+  `numeroServicio` varchar(50) NOT NULL,
   `NomServicio` varchar(30) NOT NULL,
   `Proveedor` varchar(30) NOT NULL,
   `Descripcion` varchar(200) NOT NULL,
   `Foto1` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `servicios`
 --
 
 INSERT INTO `servicios` (`IdServicio`, `numeroServicio`, `NomServicio`, `Proveedor`, `Descripcion`, `Foto1`) VALUES
-(22, 123, 'cambio de aceite', '1004510351', 'seasrdctvyhbujnkml,', '../Uploads/Productos/perfil1.jpg');
+(26, '12', 'Cambio de aceite', '1004510353', 'Un cambio de aceite es simplemente el proceso de retirar el aceite usado y el filtro de aceite y de colocar aceite nuevo (y un nuevo filtro) en el auto.', '../Uploads/Productos/Cambio de aceite1.jpg'),
+(27, '123', 'Cambio de aceite', '1004510352', 'Un cambio de aceite es simplemente el proceso de retirar el aceite usado y el filtro de aceite y de colocar aceite nuevo (y un nuevo filtro) en el auto.', '../Uploads/Productos/CambiodeAceite.jpg'),
+(28, '124', 'Revisión de la suspensión', '1004510352', 'Inspeccionar posibles fugas, grietas u otros daños en sus amortiguadores; Verificar si tu vehículo rebota, se inclina hacia adelante, hacia atrás o se desvía hacia los lados', '../Uploads/Productos/Revisar la suspencion.jpg');
 
 -- --------------------------------------------------------
 
@@ -122,21 +140,22 @@ CREATE TABLE `usuarios` (
   `Nombres` varchar(30) NOT NULL,
   `Apellidos` varchar(30) NOT NULL,
   `Email` varchar(40) NOT NULL,
+  `Direccion` varchar(100) NOT NULL,
   `Telefono` varchar(40) NOT NULL,
   `Clave` varchar(40) NOT NULL,
   `Rol` varchar(20) NOT NULL,
   `Estado` varchar(15) NOT NULL,
   `Foto` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`Identificacion`, `TipoDocumento`, `Nombres`, `Apellidos`, `Email`, `Telefono`, `Clave`, `Rol`, `Estado`, `Foto`) VALUES
-('1004510351', 'Cc', 'Andres', 'Mancilla', 'Famancilla1@misena.edu.co', '3115662359', '202cb962ac59075b964b07152d234b70', 'Administrador', 'Activo', '../Uploads/Usuarios/perfil1.jpg'),
-('1004510352', 'Cc', 'Andres ', 'Mancilla', 'fabianmancilla0708@gmail.com', '3115662359', 'e73506c6eb01a0f29e30265deaf642a3', 'Cliente', 'Activo', '../Uploads/Usuarios/perfil2.jpeg'),
-('1004510353', 'Cc', 'Melani', 'Mancilla', 'loquesea@gmail.com', '65555555555', '09436b42cff38ac498b44b8200ace6e2', 'Cliente', 'Activo', '../Uploads/Usuarios/perfil1.jpg');
+INSERT INTO `usuarios` (`Identificacion`, `TipoDocumento`, `Nombres`, `Apellidos`, `Email`, `Direccion`, `Telefono`, `Clave`, `Rol`, `Estado`, `Foto`) VALUES
+('1004510351', 'Cc', 'Favian', 'Mancilla', 'favian@misena.edu.co', '', '3115662350', '202cb962ac59075b964b07152d234b70', 'Cliente', 'Activo', ''),
+('1004510352', 'Cc', 'Melani ', 'Mancilla', 'Melani@gmail.com', '', '3115662340', '202cb962ac59075b964b07152d234b70', 'Vendedor', 'Activo', ''),
+('1004510353', 'Cc', 'Andres', 'Angulo', 'Andres@gmail.com', '', '3115662360', '202cb962ac59075b964b07152d234b70', 'Vendedor', 'Activo', '');
 
 -- --------------------------------------------------------
 
@@ -152,11 +171,19 @@ CREATE TABLE `ventas` (
   `Producto` varchar(200) NOT NULL,
   `Unidades` int(50) NOT NULL,
   `Precio unitario` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `citas`
+--
+ALTER TABLE `citas`
+  ADD PRIMARY KEY (`IdCita`),
+  ADD KEY `Cliente` (`Cliente`),
+  ADD KEY `Taller` (`Taller`);
 
 --
 -- Indices de la tabla `factura`
@@ -202,6 +229,12 @@ ALTER TABLE `ventas`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `citas`
+--
+ALTER TABLE `citas`
+  MODIFY `IdCita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
@@ -217,17 +250,24 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `quejas`
 --
 ALTER TABLE `quejas`
-  MODIFY `NumerQueja` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `NumerQueja` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `IdServicio` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `IdServicio` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `citas`
+--
+ALTER TABLE `citas`
+  ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`Cliente`) REFERENCES `usuarios` (`Identificacion`),
+  ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`Taller`) REFERENCES `usuarios` (`Identificacion`);
 
 --
 -- Filtros para la tabla `productos`

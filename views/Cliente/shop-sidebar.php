@@ -50,10 +50,11 @@ require_once("../../controllers/mostrarInfoCliente.php");
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="../Cliensite/css/style.css">
+  <link rel="stylesheet" href="../Cliensite/css/styleLogin.css">
 
 </head>
 
-<body id="body">
+<body id="bodys">
 
 <?php
 	include("include-pag.php")
@@ -75,10 +76,15 @@ require_once("../../controllers/mostrarInfoCliente.php");
 	</div>
 </section>
 
-<section>
-	<input type="search">
+<section class="buscar">
+	<div class="input">
+			<form action="../../controllers/BuscarproductosCliente.php" method="POST">
+			<input type="search" placeholder="Buscar" id="buscador" name="Buscar" >
+			<button class="Buscar" type="submit">Buscar</button>
+			</form>
+	</div>
+	<div id="resultado"></div>
 </section>
-
 
 <section class="products section">
 	<div class="container">
@@ -144,6 +150,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 			</div>
 			<div class="col-md-9">
 				<div class="row">
+					
 					<?php
 						mostrarProductosClientes()
 					?>
@@ -256,6 +263,8 @@ require_once("../../controllers/mostrarInfoCliente.php");
     <!-- 
     Essential Scripts
     =====================================-->
+	
+
     
     <!-- Main jQuery -->
     <script src="../Cliensite/plugins/jquery/dist/jquery.min.js"></script>

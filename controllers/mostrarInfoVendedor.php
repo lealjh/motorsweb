@@ -288,8 +288,10 @@ function cargarProductoEditar() {
 
 // Mostrar los servios al vendedor
 function cargarServiciosVendedor() {
+
+    $id = $_SESSION['id'];
     $objConsultas = new Consultas();
-    $result = $objConsultas -> mostrarServicioVendedor();
+    $result = $objConsultas -> mostrarServicioVendedor($id);
 
     if ( !isset( $result ) ) {
         echo '<h2>No hay servicios registrados </h2>';
@@ -297,7 +299,7 @@ function cargarServiciosVendedor() {
         foreach ( $result as $f ) {
             echo '
                 <tr>
-                    <td>'.$f[ 'IdServicio' ] .'</td>
+                    <td>'.$f[ 'numeroServicio' ] .'</td>
                     <td>'.$f[ 'NomServicio' ] . '</td>
                     <td>'.$f[ 'Proveedor' ] .'</td>
                     <td>'.$f[ 'Descripcion' ]. '</td>
@@ -397,6 +399,287 @@ function serviciosregistrados()
       ';
   }
 
+}
+
+//mustra las citas solicitadas o pendientes
+function mostrarCitas(){
+
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitasVendedor($id);
+    
+
+        if (!isset($result)) {
+            echo '<h2>Hasta este momento no te han solitado ninguna cita</h2>';
+        } else {
+            foreach ($result as $f) {
+
+
+    echo'<tr>
+        <td>'.$f['NomServicio'].'</td>
+        <td>'.$f['Nombres'].'</td>
+        <td>'.$f['Telefono'].'</td>
+        <td>'.$f['Fecha'].' / '.$f['Hora'].'</td>
+        <td>'.$f['EstadoCita'].'</td>
+        <td><a href="../../controllers/aceptarCitaVendedor.php?id='.$f['IdCita'].'" class="btn btn-primary"><i class="ti-trash " ></i>Aceptar</a></td>
+        <td style="color:white;"><a  data-bs-toggle="modal" data-bs-target="#cita'.$f['IdCita'].'" class="btn btn-info"><i style="padding-right:4px;" class="ti-write " ></i>Reprogramar</a></td>
+        <td><a href="../../controllers/cancelarCitaVendedor.php?id='.$f['IdCita'].'" class="btn btn-danger"><i class="ti-trash " ></i>Cancelar</a></td>
+    </tr>';
+    }
+}
+}
+
+//muestra las citas Aceptadas
+function mostrarCitasAceptadas(){
+
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitasVendedorA($id);
+    
+
+        if (!isset($result)) {
+            echo '<h2>Hasta este momento no te han solitado ninguna cita</h2>';
+        } else {
+            foreach ($result as $f) {
+
+
+    echo'<tr>
+        <td>'.$f['NomServicio'].'</td>
+        <td>'.$f['Nombres'].'</td>
+        <td>'.$f['Telefono'].'</td>
+        <td>'.$f['Fecha'].' / '.$f['Hora'].'</td>
+        <td>'.$f['EstadoCita'].'</td>
+     <td style="color:white;"><a  data-bs-toggle="modal" data-bs-target="#citas'.$f['IdCita'].'" class="btn btn-info"><i style="padding-right:4px;" class="ti-write " ></i>Reprogramar</a></td>
+
+        <td><a href="../../controllers/cancelarCitaVendedor.php?id='.$f['IdCita'].'" class="btn btn-danger"><i class="ti-trash " ></i>Cancelar</a></td>
+        <td><a href="../../controllers/citaTerminadaVendedor.php?id='.$f['IdCita'].'" class="btn btn-danger"><i class="ti-check-box " ></i>Terminada</a></td>
+    </tr>';
+    }
+}
+}
+
+//modal pra formulario de reagendar citas
+function modalReagendarCitas(){
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitasVendedor($id);
+
+
+    if (!isset($result)) {
+        echo '';
+    } else{
+    foreach ($result as $f){
+
+
+        echo '
+        <div class="modal product-modal" id="cita'.$f['IdCita'].'" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
+                      <div class="modal-dialog modal-dialog-centered" style="max-width: 1200px; max-height: 900px;"  >
+                        <div class="modal-content " >
+    
+                            <div class="modal-body" >
+                                <div class="row">
+                                    <h3 style="text-align:center; margin-bottom: 30px;">Agendamiento de cita</h3>
+                                    <form class="text-left clearfix"
+                                                action="../../controllers/reagendarCitaVendedor.php" method="POST"
+                                                enctype="multipart/form-Data">
+                                                <div class="row ">
+                                                <div class="form-group col-md-6" "margin-bottom:0px;">
+                                                <label> Servicio requerido</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Servicio requerido" readonly value="'.$f['NomServicio'].'" >
+                                                    </div>
+                                                    <div class="form-group col-md-6" "margin-bottom:0px;">
+                                                    <label> Nombre del Taller</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Nombre producto" readonly value="'.$f['Nombres'].'" >
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                    <label> Fecha de la cita</label>
+                                                        <input type="date" class="form-control" 
+                                                        placeholder="Proveedor" name="fecha">
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                    <label> hora de la cita</label>
+                                                        <input type="time" class="form-control" placeholder="Cantidad"
+                                                            name="hora">
+                                                    </div>
+                                                    <div class="form-group col-md-12" style="margin-bottom:0px;">
+                                                    <label> Direccion</label>
+                                                        <input type="text" class="form-control" placeholder="Cantidad" readonly value="'.$f['Direccion'].'">
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:6px;">
+                                                    
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['numeroServicio'].'"
+                                                            name="IdServicio">
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:6px;">
+                                                    
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['IdCita'].'"
+                                                            name="idcita">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                    
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$id.'"
+                                                            name="IdCliente">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                   
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['Identificacion'].'"
+                                                            name="IdTaller">
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit"
+                                                        class="btn btn-main text-center">Registrar</button>
+                                                </div>
+                                            </form>
+                                    
+                                </div>	
+                            </div>
+    
+                            <div class="modal-footer" style="display: flex; justify-content: center;>
+                                
+                                <div class"row">
+                                    <div class="col-md-8" style="display: flex; justify-content: center; text-align:center;">
+                                        <p> Estimado/a cliente, Si por alguna razón necesita cancelar o reprogramar la cita, le pedimos amablemente lo registre con un día de anticipación. </p>
+                                    </div>
+                                    <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                </div>
+                            
+                            </div>
+                            
+                        </div>
+                      </div>
+                </div>
+                ';
+    }}
+}
+
+//modal pra formulario de reagendar citas
+function modalReagendarCitasAceptas(){
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitasVendedorA($id);
+
+
+    if (!isset($result)) {
+        echo '';
+    } else{
+    foreach ($result as $f){
+
+
+        echo '
+        <div class="modal product-modal" id="citas'.$f['IdCita'].'" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
+                      <div class="modal-dialog modal-dialog-centered" style="max-width: 1200px; max-height: 900px;"  >
+                        <div class="modal-content " >
+    
+                            <div class="modal-body" >
+                                <div class="row">
+                                    <h3 style="text-align:center; margin-bottom: 30px;">Agendamiento de cita</h3>
+                                    <form class="text-left clearfix"
+                                                action="../../controllers/reagendarCitaVendedor.php" method="POST"
+                                                enctype="multipart/form-Data">
+                                                <div class="row ">
+                                                <div class="form-group col-md-6" "margin-bottom:0px;">
+                                                <label> Servicio requerido</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Servicio requerido" readonly value="'.$f['NomServicio'].'" >
+                                                    </div>
+                                                    <div class="form-group col-md-6" "margin-bottom:0px;">
+                                                    <label> Nombre del Taller</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Nombre producto" readonly value="'.$f['Nombres'].'" >
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                    <label> Fecha de la cita</label>
+                                                        <input type="date" class="form-control" 
+                                                        placeholder="Proveedor" name="fecha">
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:0px;">
+                                                    <label> hora de la cita</label>
+                                                        <input type="time" class="form-control" placeholder="Cantidad"
+                                                            name="hora">
+                                                    </div>
+                                                    <div class="form-group col-md-12" style="margin-bottom:0px;">
+                                                    <label> Direccion</label>
+                                                        <input type="text" class="form-control" placeholder="Cantidad" readonly value="'.$f['Direccion'].'">
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:6px;">
+                                                    
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['numeroServicio'].'"
+                                                            name="IdServicio">
+                                                    </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom:6px;">
+                                                    
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['IdCita'].'"
+                                                            name="idcita">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                    
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$id.'"
+                                                            name="IdCliente">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                   
+                                                        <input type="hidden" class="form-control" placeholder="Cantidad" value="'.$f['Identificacion'].'"
+                                                            name="IdTaller">
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit"
+                                                        class="btn btn-main text-center">Registrar</button>
+                                                </div>
+                                            </form>
+                                    
+                                </div>	
+                            </div>
+    
+                            <div class="modal-footer" style="display: flex; justify-content: center;>
+                                
+                                <div class"row">
+                                    <div class="col-md-8" style="display: flex; justify-content: center; text-align:center;">
+                                        <p> Estimado/a cliente, Si por alguna razón necesita cancelar o reprogramar la cita, le pedimos amablemente lo registre con un día de anticipación. </p>
+                                    </div>
+                                    <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                </div>
+                            
+                            </div>
+                            
+                        </div>
+                      </div>
+                </div>
+                ';
+    }}
+}
+
+//muestra las citas Terminadas o canceladas
+function mostrarCitasTermindas(){
+
+    $id = $_SESSION['id'];
+
+    $objConsultas = new consultas();
+    $result = $objConsultas->mostrarCitasVendedorP($id);
+    
+
+        if (!isset($result)) {
+            echo '<h2>Hasta este momento no te han solitado ninguna cita</h2>';
+        } else {
+            foreach ($result as $f) {
+
+
+    echo'<tr>
+        <td>'.$f['NomServicio'].'</td>
+        <td>'.$f['Nombres'].'</td>
+        <td>'.$f['Telefono'].'</td>
+        <td>'.$f['Fecha'].' / '.$f['Hora'].'</td>
+        <td>'.$f['EstadoCita'].'</td>
+    </tr>';
+    }
+}
 }
 
 ?>

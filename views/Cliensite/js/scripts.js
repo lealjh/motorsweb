@@ -7,3 +7,5 @@ document.getElementById("roles").addEventListener("change", function() {
     alert("Si eliges registrarte como Taller o Vendedor, tu cuenta será activada después de una breve revisión por parte del administrador. ¡Gracias por tu comprensión!");
   }
 });
+
+

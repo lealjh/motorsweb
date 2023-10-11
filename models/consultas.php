@@ -610,7 +610,6 @@
 
         }
 
-
         // Contar los Productos registrados para el administrador
         public function  contarproductos(){
 
@@ -714,7 +713,6 @@
             return $f;
         }
 
-
         // Mostrar productos para modificarlos
         public function mostrarProducVendedor($id_Producto){
 
@@ -763,19 +761,20 @@
                 $result->execute();
     
                 echo '<script> alert("Has añadido con exito el Servicio") </script>';
-                echo "<script>location.href='../views/Vendedor/registrarServicios.php'</script>";
+                echo "<script>location.href='../views/Vendedor/registrarServicio.php'</script>";
         }
         
         // Mostrar servicios
-        public function mostrarServicioVendedor(){
+        public function mostrarServicioVendedor($id){
 
             $f = null;
 
             $objConexion = new Conexion();
             $conexion = $objConexion -> get_conexion();
 
-            $buscar = "SELECT * FROM servicios ";
+            $buscar = "SELECT * FROM servicios WHERE Proveedor=:id";
             $result = $conexion -> prepare ($buscar);
+            $result->bindParam(":id", $id);
 
 
             $result -> execute();
@@ -787,6 +786,7 @@
             return $f;
 
         }
+
         // Eliminar Servicios del vendedor
         public function eliminarServicioVendedor($id){
 
@@ -828,8 +828,9 @@
             return $f;
 
         }
-         // Se hace el update para actualizar los productos
-         public function ActualizarServicioVendedor($IdServicio, $NomServicio, $Proveedor, $Descripcion){
+
+        // Se hace el update para actualizar los productos
+        public function ActualizarServicioVendedor($IdServicio, $NomServicio, $Proveedor, $Descripcion){
 
             $objConexion = new Conexion();
             $conexion = $objConexion-> get_conexion();
@@ -998,7 +999,7 @@
 
         }
 
-        // Contar los Productos registrados para el administrador
+        // Contar los Productos registrados para el Vendedor
         public function  contarproductosVendedor($id){
 
             $f = null;
@@ -1020,7 +1021,7 @@
             return $f;
         }
 
-        // Contar los Productos registrados para el administrador
+        // Contar los Productos registrados para el Vendedor
         public function  contarserviciosVendedor($id){
 
             $f = null;
@@ -1038,6 +1039,172 @@
                 $f[] = $resultado;
             }
             return $f;
+        }
+
+        //Mostrar las citas hechas por el cliente al vendedor 
+        public function mostrarCitasVendedor($id){
+
+            $f = null;
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion -> get_conexion();
+
+            $buscar = "SELECT * 
+                       FROM citas A 
+                       INNER JOIN servicios B ON A.Servicio = B.numeroServicio
+                       INNER JOIN usuarios C ON A.Cliente = C.Identificacion WHERE Taller =:id AND EstadoCita='Pendiente'
+                       ";
+
+            $result = $conexion -> prepare ($buscar);
+            $result ->bindParam(":id", $id) ;           
+            $result -> execute();
+
+            while ($resultado = $result->fetch()){
+                $f[] = $resultado;
+            }
+            
+            return $f;
+
+        }
+        //Mostrar las citas hechas por el cliente al vendedor Aceptadas
+        public function mostrarCitasVendedorA($id){
+
+            $f = null;
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion -> get_conexion();
+
+            $buscar = "SELECT * 
+                       FROM citas A 
+                       INNER JOIN servicios B ON A.Servicio = B.numeroServicio
+                       INNER JOIN usuarios C ON A.Cliente = C.Identificacion WHERE Taller =:id AND EstadoCita='Aceptada'
+                       ";
+
+            $result = $conexion -> prepare ($buscar);
+            $result ->bindParam(":id", $id) ;           
+            $result -> execute();
+
+            while ($resultado = $result->fetch()){
+                $f[] = $resultado;
+            }
+            
+            return $f;
+
+        }
+        //Mostrar las citas hechas por el cliente al vendedor Terminadas o canceladas
+        public function mostrarCitasVendedorP($id){
+
+            $f = null;
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion -> get_conexion();
+
+            $buscar = "SELECT * 
+                       FROM citas A 
+                       INNER JOIN servicios B ON A.Servicio = B.numeroServicio
+                       INNER JOIN usuarios C ON A.Cliente = C.Identificacion WHERE Taller =:id AND EstadoCita IN ('Terminada', 'Cancelada')
+                       ";
+
+            $result = $conexion -> prepare ($buscar);
+            $result ->bindParam(":id", $id) ;           
+            $result -> execute();
+
+            while ($resultado = $result->fetch()){
+                $f[] = $resultado;
+            }
+            
+            return $f;
+
+        }
+        //Cancelar cita cliente
+        public function cancelarCitaVendedor($id, $cancelar){
+
+            
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $eliminar = "UPDATE citas SET EstadoCita=:cancelar WHERE IdCita=:id ";
+            $result = $conexion->prepare($eliminar);
+
+            $result->bindParam(":id", $id);
+            $result->bindParam(":cancelar", $cancelar);
+            
+
+            
+
+            $result->execute();
+
+            echo '<script> alert("La cita fue cancelada") </script>';
+            echo '<script>location.href="../views/Vendedor/VerCitasP.php?"</script>';            
+
+        }
+        //Aceptar citas
+        public function aceptarCitaVendedor($id, $aceptar){
+
+            
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $eliminar = "UPDATE citas SET EstadoCita=:aceptar WHERE IdCita=:id ";
+            $result = $conexion->prepare($eliminar);
+
+            $result->bindParam(":id", $id);
+            $result->bindParam(":aceptar", $aceptar);
+            
+
+            
+
+            $result->execute();
+
+            echo '<script> alert("La cita fue aceptada") </script>';
+            echo '<script>location.href="../views/Vendedor/VerCitasA.php?"</script>';       
+
+        }
+
+        //Aceptar citas
+        public function citaTerminadaVendedor($id, $terminada){
+
+            
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $eliminar = "UPDATE citas SET EstadoCita=:terminada WHERE IdCita=:id ";
+            $result = $conexion->prepare($eliminar);
+
+            $result->bindParam(":id", $id);
+            $result->bindParam(":terminada", $terminada);
+            
+
+            $result->execute();
+
+            echo '<script> alert("La cita fue hecha y dado por terminada") </script>';
+            echo '<script>location.href="../views/Vendedor/VerCitas.php?"</script>';       
+
+        }
+
+        //Mostrar citas para reagendar
+        public function MostrarCitasReagendar($idCita, $fecha, $hora){
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $reagendar = "UPDATE citas SET Fecha=:fecha, Hora=:hora WHERE IdCita=:idCita ";
+            $result = $conexion->prepare($reagendar);
+
+            $result->bindParam(":fecha", $fecha);
+            $result->bindParam(":hora", $hora);
+            $result->bindParam(":idCita", $idCita);
+
+
+            $result->execute();
+
+            echo '<script> alert("La cita fue Reagendada") </script>';
+            echo '<script>location.href="../views/Vendedor/VerCitas.php?"</script>';  
+
+            
+
+
+
         }
 
 
@@ -1145,7 +1312,7 @@
             $objConexion = new Conexion();
             $conexion = $objConexion -> get_conexion();
 
-            $buscar = "SELECT * FROM servicios";
+            $buscar = "SELECT * FROM servicios A INNER JOIN usuarios B ON A.Proveedor = B.Identificacion";
             $result = $conexion -> prepare ($buscar);
 
            
@@ -1182,6 +1349,7 @@
             return $f;
 
         }
+
 
         //Registrar una queja 
         public function insertarDenunciaCliente($usuario, $nombreUsuario, $asunto, $descripcion){
@@ -1230,6 +1398,34 @@
             return $f;
 
         }
+
+        //Mostrar las citas hechas por el cliente
+        public function mostrarCitas($id){
+
+            $f = null;
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion -> get_conexion();
+
+            $buscar = "SELECT * 
+                       FROM citas A 
+                       INNER JOIN usuarios B ON  A.Cliente = B.Identificacion
+                       INNER JOIN usuarios C ON A.Taller = C.Identificacion
+                       INNER JOIN servicios D ON A.Servicio = D.numeroServicio Where Cliente=:id
+                       ";
+
+            $result = $conexion -> prepare ($buscar);
+            
+            $result -> bindParam(":id", $id);
+            $result -> execute();
+
+            while ($resultado = $result->fetch()){
+                $f[] = $resultado;
+            }
+            
+            return $f;
+
+        }
         
         //Eliminar queja cliente
         public function eliminarQuejaCliente($id){
@@ -1251,51 +1447,85 @@
 
         }
 
+        //Registrar una Cita 
+        public function insertarCitaCliente($fecha, $hora,$Nservicio,$Ncliente, $Ntaller, $estado){
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
 
-         
-            
-        
+            $registrar = "INSERT INTO citas (Cliente, Taller, Fecha, hora, Servicio, EstadoCita ) values(:Ncliente, :Ntaller, :fecha, :hora, :Nservicio, :estado)";
 
-        // Modificar cuenta del cliente
-        // public function modificarCuentaCliente($identificacion, $tipo_doc, $nombres, $apellidos, $email, $telefono){
+            $result = $conexion -> prepare($registrar);
 
-        //     $objConexion = new Conexion();
-        //     $conexion = $objConexion-> get_conexion();
-
-        //     $actualizar = "UPDATE usuarios SET TipoDocumento=:tipo_doc, Nombres=:nombres, Apellidos=:apellidos, Email=:email, Telefono=:telefono WHERE Identificacion=:identificacion";
-
-        //     $result = $conexion -> prepare($actualizar);
-
-        //     $result->bindParam("identificacion", $identificacion);
-        //     $result->bindParam("tipo_doc", $tipo_doc);
-        //     $result->bindParam("nombres", $nombres);
-        //     $result->bindParam("apellidos", $apellidos);
-        //     $result->bindParam("email", $email);
-        //     $result->bindParam("telefono", $telefono);
-
-        //     $result-> execute();
-
-        //     echo "<script>swal.fire({
-        //         icon: 'success',
-        //         title: 'Informacion modificada',
-        //         confirmButtonText: 'Ok'
-        //     }).then(function() {
-        //         window.location = '../views/Cliente/perfil.php?id=$identificacion';
-        //     });</script>";
-
-            
-            
-            
+            $result->bindParam(":Ncliente", $Ncliente);
+            $result->bindParam(":Ntaller", $Ntaller);
+            $result->bindParam(":fecha", $fecha);
+            $result->bindParam(":hora", $hora);
+            $result->bindParam(":Nservicio", $Nservicio);
+            $result->bindParam(":estado", $estado);
 
 
 
-        // }
+            $result-> execute();
 
         
+            echo '<script> alert("Tu cita fue registrada correctamente") </script>';
+            echo "<script> location.href = '../views/Cliente/llanteras.php'</script>";
+        }
 
-        
-        
-    
+        //Cancelar cita cliente
+        public function cancelarCitaCliente($id, $cancelar){
+
+            
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $eliminar = "UPDATE citas SET EstadoCita=:cancelar WHERE IdCita=:id ";
+            $result = $conexion->prepare($eliminar);
+
+            $result->bindParam(":id", $id);
+            $result->bindParam(":cancelar", $cancelar);
+            
+
+            
+
+            $result->execute();
+
+            echo '<script> alert("Su cita Fue cancelada") </script>';
+            echo '<script>location.href="../views/Cliente/Citas.php?"</script>';            
+
+        }
+
+        //Modificar cita cliente
+        public function ModificarCitaCliente($fecha, $hora, $idCita){
+
+            $objConexion = new Conexion();
+            $conexion = $objConexion-> get_conexion();
+
+            $actualizar = "UPDATE citas SET Fecha=:fecha, Hora=:hora WHERE IdCita=:idCita";
+
+            $result = $conexion -> prepare($actualizar);
+
+            $result->bindParam(":fecha", $fecha);
+            $result->bindParam(":hora", $hora);
+            $result->bindParam(":idCita", $idCita);
+            
+
+            $result-> execute();
+
+            echo '<script>swal.fire({
+                icon: "success",
+                title: "Tu cita fue reagendada",
+                confirmButtonText: "Ingresar"
+            }).then(function() {
+                window.location = "../views/Cliente/Citas.php";
+            });</script>';
+
+            
+
+
+
+        }
+
 
     }
 
