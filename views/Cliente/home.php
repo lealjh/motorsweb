@@ -40,6 +40,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <!-- Themefisher Icon font -->
+  <script src="https://kit.fontawesome.com/a6c0b2cb0d.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../Cliensite/plugins/themefisher-font/style.css">
   <!-- bootstrap.min css -->
   <link rel="stylesheet" href="../Cliensite/plugins/bootstrap/css/bootstrap.min.css">
@@ -158,7 +159,19 @@ require_once("../../controllers/mostrarInfoCliente.php");
 					<div class="product-thumb imagenesP" data-aos="zoom-in"  data-aos-duration="1500">
 						<span class="bage">Descuento</span>
 						<img class="img-responsive" src="../Cliensite/images/shop/products/product-1.jpg" alt="product-img" style="height: 400px;" />
-						<div class="preview-meta">
+									
+										<div class="preview-meta">
+					<div class="calif">
+						<ul class="star-calif">
+							<li>
+										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star"></i>
+							</li>
+						</ul>
+					</div>
 							<ul>
 								<li>
 									<span  data-toggle="modal" data-target="#product-modal">
@@ -181,6 +194,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 					<div class="descri-produc">
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore possimus ducimus, ab nostrum atque neque voluptatem aliquid iusto nobis placeat.</p>
 					</div>
+					
 				</div>
 			</div>
 			<div class="col-md-4">

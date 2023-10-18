@@ -1009,6 +1009,7 @@ box-shadow: 7px 11px 21px -4px rgba(0,0,0,0.67); */
   transition: 0.2s;
   transform: translateY(10px);
 }
+
 .product-item .product-thumb .preview-meta li {
   display: inline-block;
 }
