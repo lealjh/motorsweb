@@ -162,41 +162,6 @@ require_once("../../controllers/mostrarInfoCliente.php");
 	</div>
 </div> -->
 
-
-
-<footer class="footer section text-center">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<ul class="social-media">
-					<li>
-						<a href="https://www.facebook.com/themefisher">
-							<i class="tf-ion-social-facebook"></i>
-						</a>
-					</li>
-					<li>
-						<a href="https://www.instagram.com/themefisher">
-							<i class="tf-ion-social-instagram"></i>
-						</a>
-					</li>
-				</ul>
-				<ul class="footer-menu text-uppercase">
-					<li>
-						<a href="contact.php">¿Tienes alguna queja?</a>
-					</li>
-					<li>
-						<a href="shop-slidebar.html">REPUESTOS</a>
-					</li>
-					<li>
-						<a href="#">POLITICAS DE PRIVACIDAD</a>
-					</li>
-				</ul>
-				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
-			</div>
-		</div>
-	</div>
-</footer>
-
 <?php
 	include("include-footer.php")
 ?>
