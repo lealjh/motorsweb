@@ -77,15 +77,7 @@ require_once("../../controllers/mostrarInfoCliente.php");
 	</div>
 </section>
 
-<section class="buscar">
-	<div class="input">
-			<form action="../../controllers/BuscarproductosCliente.php" method="POST">
-			<input type="search" placeholder="Buscar" id="buscador" name="Buscar" >
-			<button class="Buscar" type="submit">Buscar</button>
-			</form>
-	</div>
-	<div id="resultado"></div>
-</section>
+
 
 <section class="products section">
 	<div class="container">
@@ -150,70 +142,104 @@ require_once("../../controllers/mostrarInfoCliente.php");
 				</div>
 			</div>
 			<div class="col-md-9">
-				<div class="row">
-					
-					<?php
-						mostrarProductosClientes()
-					?>
-			<!-- <div class="col-md-4">
-				<div class="product-item">
-					<div class="product-thumb">
-						<span class="bage">Sale</span>
-						<img class="img-responsive" src="../Cliensite/images/shop/products/product-1.jpg" alt="product-img" style="height: 400px;" />
-						<div class="preview-meta">
-							<ul>
-								<li>
-									<span  data-toggle="modal" data-target="#product-modal">
-										<i class="tf-ion-ios-search-strong"></i>
-									</span>
-								</li>
-								<li>
-			                        <a href="#!" ><i class="tf-ion-ios-heart"></i></a>
-								</li>
-								<li>
-									<a href="#!"><i class="tf-ion-android-cart"></i></a>
-								</li>
-							</ul>
-                      	</div>
-					</div>
-					<div class="product-content">
-						<h4><a href="product-single.html">Reef Boardsport</a></h4>
-						<p class="price">$200</p>
-					</div>
+			<div class="input">
+					<form action="" method="GET">
+					<input type="text" placeholder="Buscar" id="buscador" name="busqueda" >
+					<button class="Buscar" type="submit" name="enviar">Buscar</button>
 				</div>
-			</div> -->
-			
-		
-		<!-- Modal -->
-		<!-- <div class="modal product-modal fade" id="product-modal">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<i class="tf-ion-close"></i>
-			</button>
-		  	<div class="modal-dialog " role="document">
-		    	<div class="modal-content">
-			      	<div class="modal-body">
-			        	<div class="row">
-			        		<div class="col-md-8 col-sm-6 col-xs-12">
-			        			<div class="modal-image">
-				        			<img class="img-responsive" src="../Cliensite/images/shop/products/modal-product.jpg" alt="product-img" style="height: 300px;"/>
-			        			</div>
-			        		</div>
-			        		<div class="col-md-4 col-sm-6 col-xs-12">
-			        			<div class="product-short-details">
-			        				<h2 class="product-title">GM Pendant, Basalt Grey</h2>
-			        				<p class="product-price">$200</p>
-			        				<p class="product-short-description">
-			        					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil cum. Illo laborum numquam rem aut officia dicta cumque.
-			        				</p>
-			        				<a href="cart.html" class="btn btn-main">Add To Cart</a>
-			        				<a href="product-single.html" class="btn btn-transparent">View Product Details</a>
-			        			</div>
-			        		</div>
-			        	</div>
-			        </div>
-		    	</div>
-		  	</div>
-		</div>  /.modal -->
+				<div class="row">
+
+				
+
+			<?php
+
+			if(isset($_GET['enviar'])){
+				$busqueda = $_GET['busqueda'];
+				
+
+				$objConexion = new Conexion();
+            	$conexion = $objConexion-> get_conexion();
+
+				$consulta = $conexion->query("SELECT * FROM productos WHERE NomProducto LIKE '%$busqueda%'");
+
+
+				while ($resultado = $consulta->fetch()){
+					
+					echo'<div class="col-md-4">
+					<div class="product-item">
+						<div class="product-thumb">
+							<span class="bage">Sale</span>
+							<img class="img-responsive" src="../'.$resultado['Foto1'].'" alt="product-img" style="height: 330px; " />
+							<div class="preview-meta">
+								<ul>
+									<li>
+										<span  data-toggle="modal" data-target="#'.$resultado['IdProducto'].'">
+											<i class="tf-ion-ios-search-strong"></i>
+										</span>
+									</li>
+									<li>
+										<a href="#!" ><i class="tf-ion-ios-heart"></i></a>
+									</li>
+									<li>
+										<a href="#!"><i class="tf-ion-android-cart"></i></a>
+									</li>
+								</ul>
+							  </div>
+						</div>
+						<div class="product-content">
+							<h4><a href="product-single.html">'.$resultado['NomProducto'].'</a></h4>
+							<p class="price">$'.$resultado['Precio'].'</p>
+						</div>
+					</div>
+				</div>'
+				;
+				}
+				
+			}else{
+				$objConexion = new Conexion();
+            	$conexion = $objConexion-> get_conexion();
+
+				$consulta = $conexion->query("SELECT * FROM productos ");
+
+
+				while ($resultado = $consulta->fetch()){
+					
+					echo'<div class="col-md-4">
+					<div class="product-item">
+						<div class="product-thumb">
+							<span class="bage">Sale</span>
+							<img class="img-responsive" src="../'.$resultado['Foto1'].'" alt="product-img" style="height: 330px;" />
+							<div class="preview-meta">
+								<ul>
+									<li>
+										<span  data-toggle="modal" data-target="#'.$resultado['IdProducto'].'">
+											<i class="tf-ion-ios-search-strong"></i>
+										</span>
+									</li>
+									<li>
+										<a href="#!" ><i class="tf-ion-ios-heart"></i></a>
+									</li>
+									<li>
+										<a href="#!"><i class="tf-ion-android-cart"></i></a>
+									</li>
+								</ul>
+							  </div>
+						</div>
+						<div class="product-content">
+							<h4><a href="product-single.html">'.$resultado['NomProducto'].'</a></h4>
+							<p class="price">$'.$resultado['Precio'].'</p>
+						</div>
+					</div>
+				</div>'
+				;
+				}
+
+			}
+
+			?>
+
+			</form>
+	</div>
 					<?php
 						modalProductos()
 					?>
